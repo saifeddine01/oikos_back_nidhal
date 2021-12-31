@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+(Traiter les demendes de remboursement) as (1)
+(Créer les comptes des secrétaire) as (2)
+(Approuver les comptes des\nprestataires partenaires) as (3)
+Administrateur --> (1)
+Administrateur --> (2)
+Administrateur --> (3)
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+(Creer une demande de visite) as (1)
+(Obtenier une étude de financement) as (2)
+(Creer un compte rendu d'une visite) as (3)
+(Proposer un offre) as (4)
+(Recevoir un dossier complet d'un bien) as (5)
+(Se notifier des changements d'un\n bien dont je suis intéressé) as (6)
+Acquéreur --> (1)
+Acquéreur --> (2)
+Acquéreur --> (3)
+Acquéreur --> (4)
+Acquéreur --> (5)
+Acquéreur --> (6)
+@enduml

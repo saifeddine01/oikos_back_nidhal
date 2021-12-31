@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+(Gestion des comptes collaborateurs) as (1)
+(Gestion des services proposés) as (2)
+(Consulter les demandes des services) as (3)
+(Echanger des fichiers avec les propiétaires) as (4)
+(Consulter les factures) as (5)
+Prestataire --> (1)
+Prestataire --> (2)
+Prestataire --> (3)
+Prestataire --> (4)
+Prestataire --> (5)
+@enduml

@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Oikos-Backend" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="app" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="oikos.app.OikosApplication" />
+    <option name="ENABLE_JMX_AGENT" value="false" />
+    <option name="ACTIVE_PROFILES" value="production" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="ALTERNATIVE_JRE_PATH" value="15" />
+    <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

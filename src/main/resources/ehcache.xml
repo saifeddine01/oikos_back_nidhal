@@ -1,0 +1,4 @@
+<ehcache>
+    <defaultCache
+            maxEntriesLocalHeap="1000"></defaultCache>
+</ehcache>

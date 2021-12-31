@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+(Gestion des dossiers de vente) as (1)
+(Consulter & Commander les service) as (2)
+(Evaluation des services commandés) as (3)
+(Gestion des annonces) as (7)
+(Planifier les visites physiques) as (4)
+(Planifier les visites virtuelles) as (5)
+(Consulter les comptes rendus des visites) as (6)
+(Consulter les offres) as (9)
+(Consulter les statistiques et données analytiques) as (8)
+Propriétaire --> (1)
+Propriétaire --> (2)
+Propriétaire --> (3)
+Propriétaire --> (4)
+Propriétaire --> (5)
+Propriétaire --> (6)
+Propriétaire --> (7)
+Propriétaire --> (8)
+Propriétaire --> (9)
+@enduml

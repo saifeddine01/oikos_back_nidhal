@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+(Gestion des appels) as (1)
+(Consulter les agendas des propriétaires) as (2)
+(Gestion des dossiers de vente) as (3)
+(Proposer des RDV ou rappels\npour les propiétaires) as (7)
+(Valider les commandes des\nservices partenaires) as (4)
+(Consulter les évaluations des services) as (5)
+(Transmettre les demandes de remboursements\ndes services à l'administrateur) as (6)
+(Prendre le relais au chatbot pour fideliser les visiteurs) as (8)
+Secrétaire --> (1)
+Secrétaire --> (2)
+Secrétaire --> (3)
+Secrétaire --> (4)
+Secrétaire --> (5)
+Secrétaire --> (6)
+Secrétaire --> (7)
+Secrétaire --> (8)
+@enduml

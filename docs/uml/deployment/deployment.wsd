@@ -1,0 +1,37 @@
+@startuml
+skinparam roundCorner 15
+skinparam nodesep 40
+skinparam ranksep 10
+node "Docker Host" as s {
+  artifact "Spring Backend" as 1 <<image>>
+  artifact "Caffeine Cache" as 2 <<image>>
+  artifact "ElasticSearch" as 4 <<image>>
+  artifact "RabbitMQ" as 3 <<image>>
+  artifact "PostgreSQL" as 5 <<image>>
+}
+1 -[hidden]down- 2
+2 -[hidden]down- 3
+3 -[hidden]down- 4
+4 -[hidden]down- 5
+node "Web Server" as w {
+    artifact "NGINX" as 6 <<image>>
+    artifact "Angular app" as 7 <<image>>
+}
+node "Mobile Device" as d {
+    artifact "Flutter App"
+}
+cloud "Email Service" as e
+cloud "SMS Service" as sms
+cloud "AI service" as ai
+cloud RPA
+7 -[hidden]down- 6
+e -[hidden]down- sms
+sms -[hidden]down- ai
+ai -[hidden]down- RPA
+s -right- w : "<<http>>"
+s -right- d : "<<http>>"
+e -left- s : "<<http>>"
+s -down- sms : "<<http>>"
+s -left- ai : "<<http>>"
+s -left- RPA : "<<http>>"
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+(Creer un compte) as (1)
+(Echanger des messages) as (2)
+(Gestion des RDVs et calendrier) as (3)
+
+Utilisateur --> (1)
+Utilisateur --> (2)
+Utilisateur --> (3)
+note "Ces cas d'utilisation sont\npartagés entre les utilisateurs" as note1
+@enduml

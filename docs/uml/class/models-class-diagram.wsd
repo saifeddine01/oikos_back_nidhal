@@ -1,0 +1,153 @@
+@startuml
+left to right direction
+package Oikos.App.Models {
+    class Utilisateur {
+        +id: Text
+        +LoginCredentials
+        +isActivated: Boolean
+    }
+    Utilisateur "0..* "-left-"1" Rappel
+    Propriétaire "0..*"-up-"2..*" Disponibilite
+    Utilisateur "0..*"-left-"2" Message
+    Utilisateur "0..*"-left-"1" Notification
+    class Message {
+        +id: Text
+        +Destinataire: Utilisateur
+        +Expediteur: Utilisateur
+        +Contenue: Text
+        +Etat: EtatMessage
+        +DateEnvoi: Timestamp
+    }
+    Message::Etat <-- EtatMessage
+    class Notification {
+        +id: Text
+        +Lien: URL
+        +DateEnvoi: Timestamp
+        +Contenue: Text
+        +Etat: EtatNotification
+    }
+    Notification::Etat <-- EtatNotification
+    class Rappel {
+        +id: Text
+        +Timestamp
+        +Tache: Text
+    }
+    class Disponibilite {
+        +id: Text
+        +Echanence: Timespan
+        +Date: Timestamp
+    }
+    enum Civilité {
+        +M
+        +Mme
+    }
+    enum SituationMatrimoniale{
+        +Célibataire
+        +PACSÉ
+        +MariéAvecContract
+        +MariéSansContract
+        +Divorcé
+        +Veuf
+    }
+    enum EtatMessage {
+        +VU
+        +ENVOYE
+        +ARCHIVE
+    }
+    enum EtatNotification {
+        +NON_VU
+        +VU
+        +ARCHIVE
+    }
+    class Prestataire extends Utilisateur{
+        +SIRET: Text
+        +RIB: Number
+        +Collaborateurs: Prestataire[]
+    }
+    Prestataire "1"--"0..*" Prestataire:Collaborateurs
+    class Administrateur extends Utilisateur{
+    }
+    class Propriétaire extends Utilisateur{
+        +Nom: Text
+        +Prenom: Text
+        +Email: Text
+        +AdressePostal: Adresse
+        +NumeroTelephone: Number
+        +Civilité
+        +SituationMatrimoniale
+    }
+    Propriétaire::SituationMatrimoniale <-- SituationMatrimoniale
+    Propriétaire::Civilité <-- Civilité
+    class Acquéreur extends Utilisateur{
+        +Nom: Text
+        +Prenom: Text
+        +Email: Text
+        +NumeroTelephone: Number
+        +isValidated: boolean
+        +validateAccount()
+    }
+    Acquéreur::validateAccount <-- Secrétaire
+    class Secrétaire extends Utilisateur{
+    }
+    Propriétaire "0..*"--"1" DossierDeVente
+    class DossierDeVente {
+        +id: Text
+        +Description: Text
+        +Adresse: Adresse
+        +DateCreation: Timestamp
+        +DateModification: Timestamp
+        +Prix: Number
+        +Images: FichierJoint[]
+    }
+    DossierDeVente "1"--"1" Annonce
+    class Annonce {
+
+    }
+    class Adresse {
+        +id: Text
+        +Adresse: Text
+        +CodePostal: Number
+        +Ville: Text
+        +Pays: Text
+    }
+    class Service {
+        +id: Text
+        +Type: TypeService
+        +Description: Text
+        +Prix: Number
+    }
+    Service::Type <-- TypeService
+    enum TypeService {
+        +RECEPTION_APPELS
+        +SEANCE_PHOTO
+        +VISITE_VIRTUELLE
+        +HOME_STAGING
+        +DIAGNOSTIC
+        +BOOSTEUR_ANNONCE
+        +NEGOCIATEUR_PROFESSIONEL
+        +NOTAIRE
+    }
+    Propriétaire "0..*"-up-"1..*" Service
+    (Propriétaire, Service) .. Commande
+    class Commande {
+        +id: Text
+        +Date: Timestamp
+        +Facture
+        +FichierJoint
+        +Evaluation
+    }
+    Prestataire "0..*"--"1" Service
+    class CompteRendu {
+    }
+    class Offre {
+    }
+    class FichierJoint {
+    }
+    class DemandeRemboursement {
+    }
+    class Facture {
+    }
+    class Evaluation {
+    }
+}
+@enduml

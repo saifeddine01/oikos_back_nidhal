@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+class Utilisateur {
+    +id: Text
+    +username: Text
+    +password: Text
+    +isActivated: Boolean
+}
+class Propriétaire extends Utilisateur{
+    +Nom: Text
+    +Prenom: Text
+    +Email: Text
+    +AdressePostal: Adresse
+    +NumeroTelephone: Number
+    +Civilité
+    +SituationMatrimoniale
+    +Piece d'identite
+}
+@enduml

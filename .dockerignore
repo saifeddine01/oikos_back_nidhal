@@ -1,0 +1,15 @@
+/.idea
+/.mvn
+/docs
+/src
+/.git
+pom.xml
+/.settings
+.classpath
+.project
+.springBeans
+/postgres-data
+/upload
+/mosquitto
+/.jpb
+/.github

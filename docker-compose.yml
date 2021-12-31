@@ -1,0 +1,72 @@
+version: '3.7'
+services:
+  oikos-backend:
+    build:
+      context: .
+    ports:
+      - ${SPRING_PORT}:8080
+    restart: unless-stopped
+    depends_on:
+      - oikos-database
+      - oikos-mqtt
+    volumes:
+      - ./upload:/application/upload
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://oikos-database:5432/${POSTGRES_DB}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - MOSQUITTO_HOST=oikos-mqtt
+  oikos-search:
+    build:
+      context: ./search/
+    ports:
+      - ${SEARCH_PORT}:8080
+    restart: unless-stopped
+    depends_on:
+      - oikos-database
+      - oikos-elasticsearch
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://oikos-database:5432/${POSTGRES_DB}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - SPRING_JPA_PROPERTIES_HIBERNATE_SEARCH_DEFAULT_ELASTICSEARCH_HOST=http://oikos-elasticsearch:9200
+  oikos-database:
+    image: postgres:13-alpine
+    ports:
+      - ${POSTGRES_PORT}:5432
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  oikos-mqtt:
+    image: eclipse-mosquitto:1.6
+    ports:
+      - 1883:1883
+      - 9001:9001
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto:/mosquitto/config
+      - mosquitto-logs:/mosquitto/logs
+  oikos-elasticsearch:
+    image: elasticsearch:5.6-alpine
+    restart: unless-stopped
+    environment:
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+volumes:
+  postgres-data:
+  mosquitto-logs:
+  upload:
+  esdata1:
+    driver: local
